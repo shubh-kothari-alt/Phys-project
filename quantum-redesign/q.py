@@ -1,5 +1,6 @@
 from flask import Flask, send_file, request
 import io
+import os
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -557,4 +558,5 @@ if __name__ == "__main__":
     thread = threading.Thread(target=run_infinite_logger)
     thread.daemon = True
     thread.start()
-    q.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    q.run(host="0.0.0.0", port=port)
